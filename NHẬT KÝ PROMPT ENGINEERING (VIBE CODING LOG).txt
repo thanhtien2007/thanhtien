@@ -1,0 +1,37 @@
+NHẬT KÝ PROMPT ENGINEERING (VIBE CODING LOG)
+
+Họ và tên: Lê Thanh Tiến
+MSSV: [Điền mã số sinh viên của bạn]
+Tên đề tài Website: Portfolio Cá Nhân - Sinh viên Kỹ thuật Phần mềm
+Công cụ AI đã sử dụng: Gemini , antigravity
+
+1. Yêu cầu ban đầu (System/Initial Prompt)
+ - Xây dựng một trang web portfolio cá nhân chuyên nghiệp, responsive, sử dụng Semantic HTML5 chuẩn ngữ nghĩa, CSS Variables (:root) để quản lý màu sắc và bố cục hiện đại bằng Flexbox & CSS Grid cho sinh viên Kỹ thuật phần mềm.
+
+2. Quá trình tinh chỉnh và Giải quyết sự cố (Iteration Iterations)
+ - Lần 1: Dựng khung Semantic HTML và CSS Variable
+Prompt đã dùng: Yêu cầu AI viết mã nguồn Python/HTML khởi tạo khung trang web cá nhân cho Lê Thanh Tiến với các thẻ ngữ nghĩa (, , , , , , ), sử dụng CSS Variables quản lý phối màu và bố cục Flexbox/Grid.
+
+ + Kết quả AI tạo ra: AI đã sinh ra cấu trúc mã nguồn hoàn chỉnh với các khối giới thiệu bản thân, danh sách dự án và kỹ năng theo đúng chuẩn CSS Variables.
+
+ + Nhận xét và Tinh chỉnh của SV: Cấu trúc các thẻ ngữ nghĩa phân chia rất tốt, tuy nhiên lúc đầu cần yêu cầu AI tách rõ thành 2 tệp riêng biệt (index.html và style.css) để dễ quản lý theo mô hình modular.
+
+ - Lần 2: Tích hợp thư viện Animate.css, AOS & Hiệu ứng tương tác (:hover/:focus)
+Prompt đã dùng: Yêu cầu tích hợp thư viện Animate.css cho phần header/hero, tích hợp AOS (Animate On Scroll) cho các section cuộn trang, đồng thời bổ sung hiệu ứng :hover, :focus mượt mà cho các nút CTA và thẻ cards.
+
+ + Thách thức gặp phải: Hiệu ứng cuộn trang ban đầu cần đảm bảo thời gian duration và offset chính xác để không bị giật khi người dùng lướt nhanh qua các section.
+
+ + Cách sửa prompt (Debug prompt): Yêu cầu AI bổ sung thẻ  cấu hình chuẩn AOS.init({ duration: 800, once: true, offset: 80 }) và tinh chỉnh transition-smooth bằng cú pháp cubic-bezier để chuyển động mượt mà hơn.
+
+Lần 3: Tối ưu hóa giao diện (Tone màu xanh nhạt, chữ trắng, phân chia khối & Dọn dẹp code thừa)
+Prompt đã dùng: Yêu cầu đổi phông nền sang màu xanh nhạt dịu mát (Ice-Blue), toàn bộ chữ màu trắng/trắng nhạt tương phản cao, phân chia các khối section thoáng đãng, đồng thời rà soát dọn dẹp các đoạn mã CSS thừa và gộp các thuộc tính card chung để tối ưu hiệu suất.
+
+ + Kết quả AI tạo ra: Hoàn thiện tệp index.html và style.css với giao diện sáng sủa, bố cục các khối section (About, Education, Projects, Skills, Certifications, Contact Form) cực kỳ rạch ròi, trực quan và tối ưu hoàn toàn trên mọi màn hình (Responsive từ điện thoại đến máy tính).
+
+3. Đánh giá cá nhân về quá trình Vibe Coding
+ - AI đã giúp bạn tiết kiệm thời gian ở phần nào nhất?
+ + AI giúp tiết kiệm thời gian rất nhiều ở việc tổng hợp cấu trúc cú pháp HTML5 chuẩn ngữ nghĩa, thiết lập hệ thống CSS Variables (:root) từ tổng quan đến chi tiết, và tự động viết các đoạn CSS Grid phức tạp cùng hiệu ứng responsive cho các thiết bị di động.
+
+ - Bài học rút ra khi đặt câu hỏi (Prompt) cho AI trong thiết kế web?
+ + Cần nêu rõ ràng mục tiêu kỹ thuật ngay từ đầu (ví dụ: dùng Semantic HTML, Flexbox/Grid thay vì lạm dụng thẻ ).
+ + Khi muốn thay đổi giao diện (như màu nền, chữ, hoặc dọn dẹp code thừa), cần đưa ra yêu cầu cụ thể về mã nguồn (ví dụ: gộp các class chung) để AI trả về kết quả chính xác, sạch sẽ và tối ưu hiệu suất tải trang ngay lập tức.
