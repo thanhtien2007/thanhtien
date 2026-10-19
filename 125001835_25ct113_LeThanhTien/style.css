@@ -1,0 +1,1173 @@
+/**
+ * ==============================================================================
+ * PORTFOLIO STYLESHEET (CLEAN CODE & OPTIMIZED) - LÊ THANH TIẾN
+ * Phiên bản tối ưu hóa dọn dẹp mã thừa, gom nhóm thuộc tính dùng chung (DRY)
+ * 
+ * Cấu trúc phân tầng chuẩn mực:
+ * 1. DESIGN TOKENS & VARIABLES (:root)
+ * 2. BASE & RESET
+ * 3. SHARED COMPONENT PATTERNS (Gom nhóm Card Base, Icon Box, Tags/Pills)
+ * 4. LAYOUT SYSTEM (Flexbox & Responsive CSS Grid)
+ * 5. COMPONENT-SPECIFIC STYLES (Header, Hero, About, Projects, Skills, Certs, Form, Footer)
+ * 6. INTERACTIONS, HOVER/FOCUS & ANIMATIONS
+ * 7. UTILITIES & RESPONSIVE MEDIA QUERIES
+ * ==============================================================================
+ */
+
+/* ==============================================================================
+   1. DESIGN TOKENS & CSS VARIABLES (:root)
+   ============================================================================== */
+:root {
+  /* Bảng màu chủ đạo (Color Palette) - Tone Xanh Nhạt Dịu Mắt & Thanh Lịch */
+  --primary-color: #2563eb;          /* Royal Blue công nghệ, nổi bật */
+  --primary-hover: #1d4ed8;          /* Royal Blue đậm cho trạng thái hover */
+  --secondary-color: #0284c7;        /* Ocean Sky Blue điểm nhấn */
+  --secondary-hover: #0369a1;        /* Ocean Blue đậm */
+  --accent-color: #059669;           /* Emerald Green tươi sáng */
+  --accent-glow: rgba(5, 150, 105, 0.25);
+
+  /* Màu nền & Bề mặt (Surfaces & Backgrounds) - Xanh Nhạt Dịu Mắt */
+  --bg-color: #eaf3fa;               /* Nền xanh nhạt pastel (Ice-Blue), không chói mắt */
+  --bg-surface: #f3f8fd;            /* Nền khối bề mặt */
+  --card-bg: rgba(255, 255, 255, 0.88); /* Kính mờ trắng ngọc trai thanh lịch */
+  --card-border: rgba(186, 215, 243, 0.75); /* Viền xanh pastel mềm mại */
+  --card-border-hover: rgba(37, 99, 235, 0.55);
+
+  /* Bảng màu Typography - Chữ xanh đen than đá tương phản cao chuẩn WCAG */
+  --text-main: #0f172a;              /* Chữ chính xanh đen than đá (Slate 900) */
+  --text-muted: #475569;             /* Chữ phụ xám xanh trung tính (Slate 600) */
+  --text-highlight: #0284c7;         /* Chữ nhấn mạnh xanh ngọc biển */
+
+  /* Phông chữ (Typography) */
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', Consolas, Monaco, monospace;
+
+  /* Thang đo Spacing phân bổ rộng rãi, thoáng đãng */
+  --spacing-xs: 0.25rem;             /* 4px */
+  --spacing-sm: 0.5rem;              /* 8px */
+  --spacing-md: 1rem;                /* 16px */
+  --spacing-lg: 1.6rem;              /* 26px */
+  --spacing-xl: 2.75rem;             /* 44px */
+  --spacing-2xl: 5.5rem;             /* 88px */
+
+  /* Bo góc (Border Radius) */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  /* Đổ bóng (Box Shadows & Soft Glow) */
+  --shadow-sm: 0 2px 8px rgba(186, 215, 243, 0.5);
+  --shadow-md: 0 10px 25px -5px rgba(148, 190, 233, 0.45), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 20px 40px -10px rgba(148, 190, 233, 0.6);
+  --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.25);
+
+  /* Thời gian chuyển động (Transitions) */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==============================================================================
+   2. BASE & RESET STYLES
+   ============================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(191, 219, 254, 0.65) 0px, transparent 55%),
+    radial-gradient(at 100% 35%, rgba(186, 230, 253, 0.55) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(219, 234, 254, 0.75) 0px, transparent 65%);
+  background-attachment: fixed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button, input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: #93c5fd;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* ==============================================================================
+   3. SHARED COMPONENT PATTERNS (GOM NHÓM THUỘC TÍNH DÙNG CHUNG - DRY)
+   ============================================================================== */
+
+/* 3.1 Khung Card cơ sở dùng chung cho: about, aside, project, cert, skill, contact */
+.card-base,
+.about-content,
+.status-sidebar,
+.project-card,
+.cert-card,
+.skill-card,
+.contact-info-card,
+.contact-form-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+/* 3.2 Gom nhóm hiệu ứng hover nâng card tương tác */
+.card-interactive:hover,
+.card-interactive:focus-within,
+.project-card:hover,
+.project-card:focus-within,
+.cert-card:hover,
+.cert-card:focus-within,
+.status-sidebar:hover,
+.skill-card:hover,
+.skill-card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg), 0 10px 30px rgba(37, 99, 235, 0.18);
+  border-color: var(--primary-color);
+}
+
+/* 3.3 Gom nhóm hộp biểu tượng (Icon Boxes) */
+.icon-box,
+.skill-icon-wrapper,
+.cert-badge-wrapper,
+.channel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  flex-shrink: 0;
+  transition: transform var(--transition-normal), background var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* 3.4 Gom nhóm nhãn và tag đệm bo tròn */
+.badge-pill,
+.hero-tag,
+.aside-badge-status,
+.tag,
+.cert-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+/* ==============================================================================
+   4. LAYOUT SYSTEM (Flexbox & CSS Grid)
+   ============================================================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsive CSS Grid */
+.projects-grid,
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: var(--spacing-xl);
+  align-items: stretch;
+}
+
+/* ==============================================================================
+   5. COMPONENT-SPECIFIC STYLES
+   ============================================================================== */
+
+/* --- 5.1 Header & Navigation (Flexbox) --- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background-color: rgba(234, 243, 250, 0.9);
+  border-bottom: 1px solid var(--card-border);
+  transition: background-color var(--transition-normal);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.logo-badge {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+nav a {
+  position: relative;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transition-fast);
+}
+
+.nav-cta-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: #ffffff !important;
+  padding: 0.5rem 1.15rem !important;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 5.2 Hero Section --- */
+.hero-section {
+  padding: var(--spacing-2xl) 0 calc(var(--spacing-2xl) - 1rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero-tag {
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  color: var(--primary-color);
+  padding: 0.35rem 0.95rem;
+  font-size: 0.85rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: var(--spacing-md);
+  max-width: 900px;
+  color: var(--text-main);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #0f172a 20%, #2563eb 60%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 720px;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+/* Nút bấm tổng quát (Buttons) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: #ffffff;
+  box-shadow: var(--shadow-md), 0 0 20px rgba(37, 99, 235, 0.25);
+}
+
+.btn-outline {
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 5.3 Section Headers --- */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-eyebrow {
+  display: inline-block;
+  color: var(--secondary-color);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+/* --- 5.4 About & Aside --- */
+.about-content,
+.status-sidebar {
+  padding: var(--spacing-xl);
+}
+
+.about-text {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-md);
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--card-border);
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.highlight-icon {
+  color: var(--accent-color);
+  font-size: 1.1rem;
+}
+
+.aside-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+}
+
+.aside-badge-status {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--accent-color);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.status-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--card-border);
+  font-size: 0.9rem;
+}
+
+.status-list-item:last-child {
+  border-bottom: none;
+}
+
+.status-label {
+  color: var(--text-muted);
+}
+
+.status-val {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* --- 5.5 Projects Section --- */
+.projects-section,
+.skills-section,
+.certifications-section,
+.contact-section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.project-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+figure.project-figure {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background-color: #dbeafe;
+}
+
+figure.project-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+figcaption.project-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.project-body {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-meta,
+.cert-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+time.project-time,
+time.cert-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+time.project-time {
+  color: var(--secondary-color);
+}
+
+time.cert-time {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.project-title,
+.cert-title {
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.35;
+  transition: color var(--transition-fast);
+}
+
+.project-title {
+  font-size: 1.35rem;
+}
+
+.cert-title {
+  font-size: 1.25rem;
+}
+
+.project-desc,
+.cert-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: var(--spacing-md);
+  flex-grow: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+}
+
+.tag {
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: #1e40af;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  transition: all var(--transition-fast);
+}
+
+.project-footer,
+.cert-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--card-border);
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+/* --- 5.6 Skills Section --- */
+.skill-card {
+  padding: var(--spacing-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+}
+
+.skill-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  background: rgba(37, 99, 235, 0.06);
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.skill-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: var(--spacing-xs);
+}
+
+.skill-category {
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+}
+
+.skill-level {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* --- 5.7 Certifications Section --- */
+.cert-card {
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.cert-card:hover::before,
+.cert-card:focus-within::before {
+  opacity: 1;
+}
+
+.cert-badge-wrapper {
+  width: 56px;
+  height: 56px;
+  background: rgba(37, 99, 235, 0.06);
+  color: var(--badge-color, var(--primary-color));
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.cert-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cert-issuer {
+  color: var(--secondary-color);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cert-status-tag {
+  padding: 0.25rem 0.65rem;
+  font-size: 0.82rem;
+}
+
+.cert-status-tag.verified {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--accent-color);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+}
+
+.cert-id {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+/* --- 5.8 Contact Section & Form --- */
+.contact-info-card,
+.contact-form-card {
+  padding: var(--spacing-xl);
+}
+
+.contact-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: var(--spacing-sm);
+}
+
+.contact-card-title i {
+  color: var(--secondary-color);
+}
+
+.contact-card-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: var(--spacing-xl);
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Tinh gọn cấu trúc link liên hệ dùng chung */
+.contact-channel-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: 0.85rem 1.1rem;
+  background: rgba(240, 247, 255, 0.9);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.contact-channel-item:not(.static):hover,
+.contact-channel-item:not(.static):focus-visible {
+  background: #ffffff;
+  border-color: var(--primary-color);
+  transform: translateX(6px);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+}
+
+.channel-icon {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  font-size: 1.25rem;
+  color: var(--secondary-color);
+}
+
+.contact-channel-item:hover .channel-icon {
+  transform: scale(1.1);
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.channel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.channel-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.channel-value {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.response-pledge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: rgba(5, 150, 105, 0.1);
+  border: 1px solid rgba(5, 150, 105, 0.25);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+/* Form Styling */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.form-label i {
+  color: var(--secondary-color);
+}
+
+.form-label .required {
+  color: #dc2626;
+}
+
+.form-control {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.form-control::placeholder {
+  color: #94a3b8;
+}
+
+.form-control:focus {
+  background: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.25);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.95rem 1.5rem;
+  font-size: 1rem;
+  margin-top: var(--spacing-xs);
+  cursor: pointer;
+}
+
+.btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-status-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.2rem;
+  background: rgba(5, 150, 105, 0.15);
+  border: 1px solid rgba(5, 150, 105, 0.35);
+  color: #047857;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 5.9 Footer (Flexbox & Semantic Social Links) --- */
+footer {
+  background-color: #dceaf7;
+  border-top: 1px solid var(--card-border);
+  padding: var(--spacing-2xl) 0 var(--spacing-xl);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer-logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.footer-tagline {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Danh sách mạng xã hội tinh gọn chuẩn semantic */
+.footer-social-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.social-pill:hover,
+.social-pill:focus-visible {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-lg);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-copyright strong {
+  color: var(--text-main);
+}
+
+/* ==============================================================================
+   6. INTERACTIONS & ANIMATIONS
+   ============================================================================== */
+
+/* Gạch chân trượt gradient cho Navigation Links */
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+  transition: width var(--transition-normal);
+}
+
+nav a:hover,
+nav a:focus-visible {
+  color: var(--text-main);
+  outline: none;
+}
+
+nav a:hover::after,
+nav a:focus-visible::after {
+  width: 100%;
+}
+
+.nav-cta-btn::after {
+  display: none !important;
+}
+
+.nav-cta-btn:hover,
+.nav-cta-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  outline: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 3px;
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: #ffffff;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  outline: none;
+}
+
+/* Hover thẻ bài viết */
+.project-card:hover figure.project-figure img {
+  transform: scale(1.08);
+}
+
+.project-card:hover .project-title,
+.cert-card:hover .cert-title {
+  color: var(--primary-color);
+}
+
+.project-card:hover .tag {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  color: var(--primary-hover);
+  transform: translateX(4px);
+  outline: none;
+}
+
+.skill-card:hover .skill-icon-wrapper {
+  transform: rotate(6deg) scale(1.12);
+  background: #ffffff;
+}
+
+.cert-card:hover .cert-badge-wrapper {
+  transform: scale(1.1) rotate(6deg);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 18px var(--badge-color, var(--primary-color));
+}
+
+[data-aos] {
+  pointer-events: auto !important;
+}
+
+/* ==============================================================================
+   7. UTILITIES & RESPONSIVE MEDIA QUERIES
+   ============================================================================== */
+@media (max-width: 900px) {
+  .about-layout,
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 680px) {
+  :root {
+    --spacing-xl: 1.8rem;
+    --spacing-2xl: 3.2rem;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .about-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid,
+  .certifications-grid {
+    grid-template-columns: 1fr;
+  }
+}

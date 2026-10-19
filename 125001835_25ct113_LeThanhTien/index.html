@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio cá nhân của Lê Thanh Tiến - Sinh viên ngành Kỹ thuật phần mềm">
+  <meta name="author" content="Lê Thanh Tiến">
+  <title>Lê Thanh Tiến | Portfolio Kỹ thuật Phần mềm</title>
+  
+  <!-- Google Fonts: Inter & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Hiệu ứng Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <!-- Hiệu ứng AOS (Animate On Scroll) CDN CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <!-- Stylesheet chính (Chuẩn CSS Modular & Tối ưu hóa DRY) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. HEADER & THẺ ĐIỀU HƯỚNG <nav> (Tích hợp Flexbox & Animate.css)
+       ======================================================================== -->
+  <header class="animate__animated animate__fadeInDown">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo" aria-label="Trang chủ Lê Thanh Tiến">
+        <span class="logo-badge">LTT</span>
+        <span>Lê Thanh Tiến</span>
+      </a>
+      
+      <!-- Thẻ điều hướng ngữ nghĩa <nav> -->
+      <nav aria-label="Thanh điều hướng chính">
+        <ul>
+          <li><a href="#about"><i class="fa-regular fa-user"></i> Về tôi</a></li>
+          <li><a href="#projects"><i class="fa-solid fa-code-fork"></i> Dự án</a></li>
+          <li><a href="#skills"><i class="fa-solid fa-layer-group"></i> Kỹ năng</a></li>
+          <li><a href="#certifications"><i class="fa-solid fa-award"></i> Chứng chỉ</a></li>
+          <li><a href="#contact" class="nav-cta-btn"><i class="fa-regular fa-envelope"></i> Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. KHU VỰC NỘI DUNG CHÍNH: <main>
+       ======================================================================== -->
+  <main>
+    <!-- HERO SECTION: Tiêu đề áp dụng Animate.css (animate__backInLeft, animate__pulse) -->
+    <section class="hero-section container">
+      <div class="hero-tag badge-pill animate__animated animate__fadeIn">
+        <span class="status-dot"></span>
+        <span>Sẵn sàng đón nhận cơ hội thực tập & cộng tác dự án mới</span>
+      </div>
+      
+      <h1 class="hero-title animate__animated animate__backInLeft">
+        Xin chào, tôi là <span class="gradient-text">Lê Thanh Tiến</span>
+      </h1>
+      
+      <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+        Sinh viên ngành Kỹ thuật phần mềm đam mê sáng tạo các sản phẩm công nghệ với tư duy 
+        <strong style="color: var(--text-highlight);">Clean Code</strong>, tối ưu hóa giao diện người dùng và 
+        vận dụng chuẩn mực các nguyên lý kỹ thuật phần mềm.
+      </p>
+      
+      <div class="hero-actions animate__animated animate__fadeInUp animate__delay-1s">
+        <!-- Nút CTA tích hợp hiệu ứng Animate.css animate__pulse -->
+        <a href="#projects" class="btn btn-primary animate__animated animate__pulse animate__infinite">
+          <i class="fa-solid fa-rocket"></i> Khám phá Dự án
+        </a>
+        <a href="https://github.com/lethanhtien" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <i class="fa-brands fa-github"></i> Xem GitHub
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION: VỀ TÔI & THẺ BỔ TRỢ NÂNG CAO <aside> (AOS data-aos="fade-up") -->
+    <section id="about" class="container" style="padding: var(--spacing-2xl) 0;" data-aos="fade-up">
+      <div class="section-header">
+        <span class="section-eyebrow">Giới thiệu tổng quan</span>
+        <h2 class="section-title">Về Bản Thân Tôi</h2>
+      </div>
+
+      <div class="about-layout">
+        <!-- Khối nội dung giới thiệu chính (kế thừa card-base) -->
+        <div class="about-content card-base">
+          <p class="about-text">
+            Một lập trình viên đam mê công nghệ với định hướng phát triển phần mềm toàn diện. Tôi luôn chú trọng vào việc viết mã sạch (Clean Code), tối ưu hóa trải nghiệm và hiệu năng giao diện người dùng, đồng thời nghiêm túc tuân thủ các nguyên lý kỹ thuật phần mềm như SOLID, OOP và Clean Architecture để tạo ra các giải pháp bền vững.
+          </p>
+          <p class="about-text">
+            Với phương châm <em>"Viết code cho con người đọc trước, sau đó máy tính mới thực thi"</em>, 
+            tôi luôn tìm kiếm những giải pháp tối ưu từ kiến trúc Hướng đối tượng đến thiết kế giao diện đáp ứng (Responsive Design).
+          </p>
+
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check highlight-icon"></i>
+              <span>Tư duy Clean Code & Refactoring</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check highlight-icon"></i>
+              <span>Kiến trúc Hướng đối tượng (OOP)</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check highlight-icon"></i>
+              <span>Semantic Web & Responsive CSS</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check highlight-icon"></i>
+              <span>Tối ưu hóa Database & Query</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- THẺ BỔ TRỢ NÂNG CAO: <aside> cho phần thông tin phụ / trạng thái (data-aos="flip-left") -->
+        <aside class="status-sidebar card-base card-interactive" data-aos="flip-left" data-aos-duration="1000" aria-label="Thông tin nhanh và trạng thái">
+          <h3 class="aside-title">
+            <i class="fa-solid fa-bolt-lightning"></i> Thông tin Trạng thái
+          </h3>
+          <div class="aside-badge-status badge-pill">
+            <span class="status-dot"></span> Đang hoạt động
+          </div>
+
+          <ul class="status-list">
+            <li class="status-list-item">
+              <span class="status-label">Chủ sở hữu:</span>
+              <span class="status-val">Lê Thanh Tiến</span>
+            </li>
+            <li class="status-list-item">
+              <span class="status-label">Chuyên ngành:</span>
+              <span class="status-val">Kỹ thuật Phần mềm</span>
+            </li>
+            <li class="status-list-item">
+              <span class="status-label">Địa điểm:</span>
+              <span class="status-val">Việt Nam</span>
+            </li>
+            <li class="status-list-item">
+              <span class="status-label">Trọng tâm:</span>
+              <span class="status-val" style="color: var(--secondary-color);">Software & Frontend</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SECTION: DỰ ÁN NỔI BẬT (CSS Grid & Thẻ <article>, <figure>, <figcaption>, <time>) -->
+    <section id="projects" class="projects-section container" data-aos="fade-up">
+      <div class="section-header">
+        <span class="section-eyebrow">Sản phẩm thực tế</span>
+        <h2 class="section-title">Dự Án Tiêu Biểu</h2>
+      </div>
+
+      <!-- CSS Grid: repeat(auto-fit, minmax(320px, 1fr)) -->
+      <div class="projects-grid">
+        <!-- Article Card: Ứng dụng Quản lý Phim -->
+        <article class="project-card card-base card-interactive" data-aos="zoom-in" data-aos-delay="150">
+          <figure class="project-figure">
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80" alt="Minh họa Ứng dụng Quản lý Phim" loading="lazy">
+            <figcaption class="project-caption">
+              <i class="fa-solid fa-camera-retro"></i> Giao diện cấu trúc & phân hệ quản lý danh mục phim
+            </figcaption>
+          </figure>
+          
+          <div class="project-body">
+            <div class="project-meta">
+              <!-- Thẻ ngữ nghĩa <time> theo chuẩn HTML5 -->
+              <time class="project-time" datetime="2026-05">
+                <i class="fa-regular fa-calendar-days"></i> Tháng 5, 2026
+              </time>
+            </div>
+            
+            <h3 class="project-title">Ứng dụng Quản lý Phim</h3>
+            <p class="project-desc">Phần mềm quản lý danh mục và lịch phát hành phim được thiết kế theo mô hình Hướng đối tượng (OOP). Ứng dụng tối ưu hóa tốc độ truy xuất và đảm bảo an toàn dữ liệu thông qua cơ chế lưu trữ tệp nhị phân chuyên biệt.</p>
+            
+            <div class="project-tags">
+              <span class="tag badge-pill">Python</span>
+              <span class="tag badge-pill">OOP</span>
+              <span class="tag badge-pill">Tệp nhị phân</span>
+              <span class="tag badge-pill">Clean Code</span>
+            </div>
+            
+            <div class="project-footer">
+              <a href="https://github.com/lethanhtien/movie-management-system" target="_blank" rel="noopener noreferrer" class="project-link">
+                <i class="fa-brands fa-github"></i> Mã nguồn GitHub
+              </a>
+              <a href="#" class="project-link">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Chi tiết
+              </a>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Article Card: Ứng dụng Giao đồ ăn FoodMate -->
+        <article class="project-card card-base card-interactive" data-aos="zoom-in" data-aos-delay="300">
+          <figure class="project-figure">
+            <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=800&q=80" alt="Minh họa Ứng dụng Giao đồ ăn FoodMate" loading="lazy">
+            <figcaption class="project-caption">
+              <i class="fa-solid fa-camera-retro"></i> Quy trình thiết kế User Flows và nguyên mẫu tương tác FoodMate
+            </figcaption>
+          </figure>
+          
+          <div class="project-body">
+            <div class="project-meta">
+              <!-- Thẻ ngữ nghĩa <time> theo chuẩn HTML5 -->
+              <time class="project-time" datetime="2026-04">
+                <i class="fa-regular fa-calendar-days"></i> Tháng 4, 2026
+              </time>
+            </div>
+            
+            <h3 class="project-title">Ứng dụng Giao đồ ăn FoodMate</h3>
+            <p class="project-desc">Giải pháp thiết kế trải nghiệm người dùng toàn diện cho nền tảng giao đồ ăn FoodMate. Tối ưu hóa hành trình khách hàng (User Flows) giúp giảm 40% thao tác đặt món, đi kèm hệ thống Design System hiện đại.</p>
+            
+            <div class="project-tags">
+              <span class="tag badge-pill">UI/UX Design</span>
+              <span class="tag badge-pill">User Flows</span>
+              <span class="tag badge-pill">Figma</span>
+              <span class="tag badge-pill">Frontend CSS</span>
+            </div>
+            
+            <div class="project-footer">
+              <a href="https://github.com/lethanhtien/foodmate-ui-ux" target="_blank" rel="noopener noreferrer" class="project-link">
+                <i class="fa-brands fa-github"></i> Mã nguồn GitHub
+              </a>
+              <a href="#" class="project-link">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Chi tiết
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION: KỸ NĂNG & CÔNG NGHỆ (CSS Grid & <li> Cards) -->
+    <section id="skills" class="skills-section container" data-aos="fade-up">
+      <div class="section-header">
+        <span class="section-eyebrow">Năng lực chuyên môn</span>
+        <h2 class="section-title">Kỹ Năng & Công Nghệ</h2>
+      </div>
+
+      <!-- CSS Grid: Lưới Kỹ Năng -->
+      <ul class="skills-grid">
+        <li class="skill-card card-base card-interactive" data-aos="fade-up" data-aos-delay="100">
+          <div class="skill-icon-wrapper icon-box" style="color: #3776ab;">
+            <i class="fa-brands fa-python"></i>
+          </div>
+          <h3 class="skill-name">Python</h3>
+          <span class="skill-category">Ngôn ngữ lập trình</span>
+          <p class="skill-level">Nâng cao / OOP & Scripting</p>
+        </li>
+        
+        <li class="skill-card card-base card-interactive" data-aos="fade-up" data-aos-delay="200">
+          <div class="skill-icon-wrapper icon-box" style="color: #00599c;">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <h3 class="skill-name">C++</h3>
+          <span class="skill-category">Ngôn ngữ lập trình</span>
+          <p class="skill-level">Cấu trúc dữ liệu & Giải thuật</p>
+        </li>
+        
+        <li class="skill-card card-base card-interactive" data-aos="fade-up" data-aos-delay="300">
+          <div class="skill-icon-wrapper icon-box" style="color: #e34f26;">
+            <i class="fa-brands fa-html5"></i>
+          </div>
+          <h3 class="skill-name">Semantic HTML5</h3>
+          <span class="skill-category">Frontend Core</span>
+          <p class="skill-level">Chuẩn ngữ nghĩa & SEO / a11y</p>
+        </li>
+        
+        <li class="skill-card card-base card-interactive" data-aos="fade-up" data-aos-delay="400">
+          <div class="skill-icon-wrapper icon-box" style="color: #264de4;">
+            <i class="fa-brands fa-css3-alt"></i>
+          </div>
+          <h3 class="skill-name">CSS3 Hiện đại</h3>
+          <span class="skill-category">Frontend Styling</span>
+          <p class="skill-level">Flexbox, Grid, Variables & Animations</p>
+        </li>
+        
+        <li class="skill-card card-base card-interactive" data-aos="fade-up" data-aos-delay="500">
+          <div class="skill-icon-wrapper icon-box" style="color: #cc292b;">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h3 class="skill-name">MS SQL Server</h3>
+          <span class="skill-category">Cơ sở dữ liệu</span>
+          <p class="skill-level">Thiết kế CSDL, T-SQL & Indexing</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECTION: CHỨNG CHỈ & THÀNH TÍCH (CSS Grid & Semantic HTML5 <article>, <time>) -->
+    <section id="certifications" class="certifications-section container" data-aos="fade-up">
+      <div class="section-header">
+        <span class="section-eyebrow">Xác thực năng lực</span>
+        <h2 class="section-title">Chứng Chỉ & Thành Tích</h2>
+      </div>
+
+      <!-- CSS Grid: repeat(auto-fit, minmax(320px, 1fr)) -->
+      <div class="certifications-grid">
+        <!-- Chứng chỉ 1: Python -->
+        <article class="cert-card card-base card-interactive" data-aos="fade-up" data-aos-delay="100">
+          <div class="cert-badge-wrapper icon-box" style="--badge-color: #3776ab;">
+            <i class="fa-brands fa-python"></i>
+          </div>
+          <div class="cert-body">
+            <div class="cert-meta">
+              <span class="cert-issuer"><i class="fa-solid fa-building-columns"></i> Python Institute</span>
+              <time class="cert-time" datetime="2025-11">
+                <i class="fa-regular fa-calendar-check"></i> 11/2025
+              </time>
+            </div>
+            <h3 class="cert-title">Python Certified Associate Programmer (PCAP)</h3>
+            <p class="cert-desc">
+              Chứng thực kiến thức chuyên sâu về lập trình hướng đối tượng (OOP), cấu trúc dữ liệu, 
+              xử lý ngoại lệ và kỹ thuật thao tác tệp tin nhị phân an toàn với tốc độ tối ưu.
+            </p>
+            <div class="cert-footer">
+              <span class="cert-status-tag badge-pill verified"><i class="fa-solid fa-circle-check"></i> Đã xác thực</span>
+              <span class="cert-id">ID: PCAP-2025-LTT</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Chứng chỉ 2: Responsive Web Design -->
+        <article class="cert-card card-base card-interactive" data-aos="fade-up" data-aos-delay="200">
+          <div class="cert-badge-wrapper icon-box" style="--badge-color: #06b6d4;">
+            <i class="fa-solid fa-laptop-code"></i>
+          </div>
+          <div class="cert-body">
+            <div class="cert-meta">
+              <span class="cert-issuer"><i class="fa-solid fa-code"></i> freeCodeCamp</span>
+              <time class="cert-time" datetime="2026-01">
+                <i class="fa-regular fa-calendar-check"></i> 01/2026
+              </time>
+            </div>
+            <h3 class="cert-title">Responsive Web Design Certification</h3>
+            <p class="cert-desc">
+              Làm chủ kiến trúc Semantic HTML5, CSS Variables, tư duy Mobile-First, Flexbox 
+              và CSS Grid để xây dựng các giao diện web mượt mà, tối ưu khả năng truy cập (a11y).
+            </p>
+            <div class="cert-footer">
+              <span class="cert-status-tag badge-pill verified"><i class="fa-solid fa-circle-check"></i> Đã xác thực</span>
+              <span class="cert-id">ID: FCC-RWD-2026</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Chứng chỉ 3: SQL & Database -->
+        <article class="cert-card card-base card-interactive" data-aos="fade-up" data-aos-delay="300">
+          <div class="cert-badge-wrapper icon-box" style="--badge-color: #cc292b;">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <div class="cert-body">
+            <div class="cert-meta">
+              <span class="cert-issuer"><i class="fa-solid fa-server"></i> HackerRank / Microsoft Learn</span>
+              <time class="cert-time" datetime="2026-03">
+                <i class="fa-regular fa-calendar-check"></i> 03/2026
+              </time>
+            </div>
+            <h3 class="cert-title">SQL (Advanced) & Database Design Specialist</h3>
+            <p class="cert-desc">
+              Chứng thực kỹ năng thiết kế cơ sở dữ liệu quan hệ, tối ưu hóa câu truy vấn phức tạp (T-SQL), 
+              chiến lược phân vùng dữ liệu và đánh chỉ mục (Clustered / Non-Clustered Indexes).
+            </p>
+            <div class="cert-footer">
+              <span class="cert-status-tag badge-pill verified"><i class="fa-solid fa-circle-check"></i> Đã xác thực</span>
+              <span class="cert-id">ID: SQL-ADV-MS2026</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION: LIÊN HỆ TRỰC TIẾP (Interactive Contact Form) -->
+    <section id="contact" class="contact-section container" data-aos="fade-up">
+      <div class="section-header">
+        <span class="section-eyebrow">Kết nối & Hợp tác</span>
+        <h2 class="section-title">Gửi Tin Nhắn Cho Tôi</h2>
+      </div>
+
+      <div class="contact-layout">
+        <!-- Cột 1: Thông tin liên hệ & Cam kết phản hồi -->
+        <div class="contact-info-card card-base" data-aos="fade-right" data-aos-delay="100">
+          <h3 class="contact-card-title">
+            <i class="fa-solid fa-comments"></i> Hãy cùng trao đổi dự án!
+          </h3>
+          <p class="contact-card-desc">
+            Tôi luôn hào hứng đón nhận các ý tưởng dự án mới, thảo luận về kỹ thuật phần mềm hoặc các cơ hội thực tập, việc làm. Đừng ngần ngại để lại lời nhắn!
+          </p>
+
+          <div class="contact-channels">
+            <a href="mailto:lethanhtien.se@gmail.com" class="contact-channel-item" aria-label="Gửi email cho Lê Thanh Tiến">
+              <div class="channel-icon icon-box"><i class="fa-regular fa-envelope"></i></div>
+              <div class="channel-content">
+                <span class="channel-label">Email trực tiếp</span>
+                <span class="channel-value">lethanhtien.se@gmail.com</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/lethanhtien" target="_blank" rel="noopener noreferrer" class="contact-channel-item" aria-label="Xem GitHub">
+              <div class="channel-icon icon-box"><i class="fa-brands fa-github"></i></div>
+              <div class="channel-content">
+                <span class="channel-label">GitHub cá nhân</span>
+                <span class="channel-value">github.com/lethanhtien</span>
+              </div>
+            </a>
+
+            <a href="https://linkedin.com/in/lethanhtien" target="_blank" rel="noopener noreferrer" class="contact-channel-item" aria-label="Xem LinkedIn">
+              <div class="channel-icon icon-box"><i class="fa-brands fa-linkedin"></i></div>
+              <div class="channel-content">
+                <span class="channel-label">LinkedIn kết nối</span>
+                <span class="channel-value">linkedin.com/in/lethanhtien</span>
+              </div>
+            </a>
+
+            <div class="contact-channel-item static">
+              <div class="channel-icon icon-box"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="channel-content">
+                <span class="channel-label">Vị trí làm việc</span>
+                <span class="channel-value">Việt Nam (On-site / Remote)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="response-pledge">
+            <span class="status-dot"></span>
+            <span>Thời gian phản hồi thông thường: <strong>Dưới 24 giờ</strong></span>
+          </div>
+        </div>
+
+        <!-- Cột 2: Form liên hệ trực tiếp tương tác -->
+        <div class="contact-form-card card-base" data-aos="fade-left" data-aos-delay="200">
+          <form id="contactForm" class="contact-form" onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="senderName" class="form-label">
+                  <i class="fa-regular fa-user"></i> Họ và tên <span class="required">*</span>
+                </label>
+                <input type="text" id="senderName" name="name" class="form-control" required placeholder="Ví dụ: Nguyễn Văn A">
+              </div>
+
+              <div class="form-group">
+                <label for="senderEmail" class="form-label">
+                  <i class="fa-regular fa-envelope"></i> Email của bạn <span class="required">*</span>
+                </label>
+                <input type="email" id="senderEmail" name="email" class="form-control" required placeholder="example@gmail.com">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="msgSubject" class="form-label">
+                <i class="fa-solid fa-heading"></i> Tiêu đề tin nhắn <span class="required">*</span>
+              </label>
+              <input type="text" id="msgSubject" name="subject" class="form-control" required placeholder="Trao đổi cơ hội thực tập / Hợp tác dự án...">
+            </div>
+
+            <div class="form-group">
+              <label for="msgContent" class="form-label">
+                <i class="fa-regular fa-comment-dots"></i> Nội dung tin nhắn <span class="required">*</span>
+              </label>
+              <textarea id="msgContent" name="message" class="form-control" rows="5" required placeholder="Xin chào Tiến, tôi muốn trao đổi với bạn về..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-submit">
+              <i class="fa-solid fa-paper-plane"></i> Gửi Tin Nhắn Ngay
+            </button>
+
+            <!-- Thông báo gửi tin nhắn thành công -->
+            <div id="formStatusMsg" class="form-status-msg" style="display: none;">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Cảm ơn bạn! Tin nhắn đã được gửi thành công. Tôi sẽ liên hệ lại sớm nhất!</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       3. FOOTER CHÂN TRANG (Flexbox & Semantic Social Navigation)
+       ======================================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-logo">Lê Thanh Tiến</span>
+          <span class="footer-tagline">Sinh viên ngành Kỹ thuật phần mềm • Đam mê kỹ thuật phần mềm</span>
+        </div>
+
+        <!-- Mạng xã hội chân trang tinh gọn với class .footer-social-nav & .social-pill -->
+        <nav class="footer-social-nav" aria-label="Liên kết mạng xã hội chân trang">
+          <a href="mailto:lethanhtien.se@gmail.com" class="social-pill" aria-label="Gửi thư điện tử">
+            <i class="fa-regular fa-envelope"></i>
+            <span>Email</span>
+          </a>
+          <a href="https://github.com/lethanhtien" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="GitHub Profile">
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://linkedin.com/in/lethanhtien" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="LinkedIn Profile">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          Bản quyền &copy; 2026 <strong>Lê Thanh Tiến</strong>. Tất cả quyền được bảo lưu.
+        </p>
+        <p>Thiết kế đạt chuẩn Semantic HTML5, CSS Variables, CSS Grid & Flexbox.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS JS CDN & Khởi tạo JavaScript tương tác -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Khởi tạo thư viện Animate On Scroll (AOS)
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 80
+      });
+    });
+
+    // Xử lý gửi Form liên hệ tương tác
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const statusMsg = document.getElementById('formStatusMsg');
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      
+      // Hiệu ứng loading nút gửi
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
+
+      setTimeout(function() {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Gửi Tin Nhắn Ngay';
+        statusMsg.style.display = 'flex';
+        event.target.reset();
+
+        setTimeout(function() {
+          statusMsg.style.display = 'none';
+        }, 7000);
+      }, 700);
+    }
+  </script>
+</body>
+</html>
