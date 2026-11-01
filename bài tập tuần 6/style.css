@@ -1,0 +1,724 @@
+/* ==========================================================================
+   PORTFOLIO CV - DESIGN SYSTEM, HIỆU ỨNG ĐỘNG & TỐI ƯU HIỆU NĂNG (60 FPS)
+   Môn học: Thiết kế Web - Bài tập Thực hành Tuần 6
+   Họ và tên: Nguyễn Văn An - Frontend / Web Developer
+   - Hoạt động 1: 'The Bug Hunter' (Săn & Sửa lỗi giao diện Mobile/Tablet)
+   - Hoạt động 2: 'Speed Up!' (Tối ưu hiệu năng, DRY Refactoring & WebP Image)
+   ========================================================================== */
+
+/* ==========================================================================
+   BẢNG MÃ MÀU THÔNG MINH (CSS VARIABLES) & DESIGN SYSTEM TOKENS
+   ========================================================================== */
+:root {
+  /* 2 màu chủ đạo (Primary & Secondary) */
+  --primary: #0284c7;             /* Xanh dương hiện đại, chuyên nghiệp */
+  --secondary: #0ea5e9;           /* Xanh cyan tươi sáng, tạo điểm nhấn */
+
+  /* 3 mức màu xám cho văn bản (Typography Grayscale) */
+  --text-dark: #0f172a;           /* Mức 1: Tiêu đề, chữ độ tương phản cao */
+  --text-main: #334155;           /* Mức 2: Nội dung đọc chính (body text) */
+  --text-light: #64748b;          /* Mức 3: Chú thích phụ, thông tin muted */
+
+  /* Màu nền tổng thể & bề mặt */
+  --bg-color: #f8fafc;            /* Nền chính toàn trang web (Body background) */
+  --bg-surface: #ffffff;          /* Nền thẻ card, panel trắng */
+  --bg-card: #f1f5f9;             /* Nền các thẻ con bên trong card */
+  --bg-dark: #0f172a;             /* Nền tối cho Header và Footer */
+
+  /* Màu sắc trạng thái & tương tác */
+  --primary-hover: #0369a1;       /* Màu hover cho liên kết và button */
+  --primary-active: #075985;      /* Màu active khi bấm nút */
+  --primary-light: #e0f2fe;       /* Nền nhạt cho badge kĩ năng, viền avatar */
+  --text-white: #ffffff;          /* Chữ màu trắng trên nền tối */
+  --text-nav: #cbd5e1;            /* Màu chữ link thanh điều hướng */
+  --border-color: #e2e8f0;        /* Màu đường viền chuẩn */
+  --border-focus: #38bdf8;        /* Màu đường viền khi focus vào ô nhập liệu */
+
+  /* Hệ thống khoảng cách chuẩn hóa (Spacing Tokens) */
+  --space-xs: 0.5rem;             /* 8px */
+  --space-sm: 0.75rem;            /* 12px */
+  --space-md: 1rem;               /* 16px */
+  --space-20: 20px;               /* 20px - Gap chuẩn cho Services */
+  --space-lg: 1.5rem;             /* 24px */
+  --space-xl: 2rem;               /* 32px */
+  --space-2xl: 3rem;              /* 48px */
+
+  /* Bo góc (Border Radius) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-full: 9999px;
+
+  /* Hiệu ứng đổ bóng chuẩn hóa (Box Shadow) */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  --shadow-btn: 0 4px 6px -1px rgba(2, 132, 199, 0.25);
+  --shadow-btn-hover: 0 10px 20px -3px rgba(2, 132, 199, 0.4), 0 4px 6px -2px rgba(2, 132, 199, 0.2);
+  --shadow-btn-active: 0 2px 4px rgba(2, 132, 199, 0.25);
+
+  /* Kích thước chiều rộng tối đa */
+  --container-max-width: 1100px;
+
+  /* Chuyển động chuẩn (Motion Transition) */
+  --transition-bezier: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   CSS RESET & CẤU HÌNH NỀN TẢNG
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  overflow-x: hidden; /* Ngăn chặn hiện thanh cuộn ngang do hiệu ứng AOS */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   HOẠT ĐỘNG 1: 'MICRO-INTERACTIONS' - NÚT BẤM CẢM XÚC
+   - Khi Hover: nhích lên 3px (transform: translateY(-3px)), đổi màu nhẹ,
+     tăng độ đậm box-shadow, sử dụng hàm chuyển động cubic-bezier mượt mà.
+   - Khi Active (Click): thu nhỏ nhẹ (scale(0.96)) tạo cảm giác "đã bấm".
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.65rem 1.35rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  user-select: none;
+  box-shadow: var(--shadow-btn);
+
+  /* HOẠT ĐỘNG 1 & 4: Transition sử dụng cubic-bezier mượt mà, tối ưu GPU */
+  transition: transform 0.25s var(--transition-bezier),
+              background-color 0.25s var(--transition-smooth),
+              box-shadow 0.25s var(--transition-smooth),
+              border-color 0.25s var(--transition-smooth);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--text-white);
+}
+
+/* HOẠT ĐỘNG 1: Trạng thái Hover - Nhích lên 3px, đổi màu nhẹ, đậm box-shadow */
+.btn:hover {
+  /* HOẠT ĐỘNG 4: Sử dụng transform: translateY thay vì top: -3px để tối ưu hiệu năng */
+  transform: translateY(-3px);
+  background-color: var(--primary-hover);
+  color: var(--text-white);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+/* HOẠT ĐỘNG 1: Trạng thái Active (Click) - Thu nhỏ nhẹ tạo xúc giác "đã bấm" */
+.btn:active {
+  /* Giữ vị trí nhẹ nhàng và scale thu nhỏ 0.96 */
+  transform: translateY(-1px) scale(0.96);
+  background-color: var(--primary-active);
+  box-shadow: var(--shadow-btn-active);
+}
+
+.btn-icon {
+  font-size: 1rem;
+  transition: transform 0.2s var(--transition-smooth);
+}
+
+.btn:hover .btn-icon {
+  /* Hiệu ứng vi chuyển động phụ trợ cho icon */
+  transform: translateX(3px);
+}
+
+/* Profile actions container */
+.profile-actions {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: center;
+}
+
+/* Form liên hệ & Nút submit */
+.contact-form {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--text-main);
+  background-color: var(--bg-surface);
+  transition: border-color 0.2s var(--transition-smooth), box-shadow 0.2s var(--transition-smooth);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 75px;
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: var(--space-xs);
+}
+
+/* ==========================================================================
+   HOẠT ĐỘNG 2: 'LOADING MASTER' - TẠO SPINNER XOAY 360 ĐỘ VÔ HẠN
+   - Sử dụng CSS thuần với @keyframes xoay 360 độ vô hạn
+   - Phần border-top-color nổi bật tạo cảm giác xoay trực quan
+   ========================================================================== */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-box {
+  background: var(--bg-surface);
+}
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  /* Vòng tròn loading với đường viền chuẩn xám nhạt */
+  border: 3.5px solid var(--border-color);
+  /* HOẠT ĐỘNG 2: Phần border-top-color nổi bật tạo hiệu ứng xoay trực quan */
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  /* HOẠT ĐỘNG 2: @keyframes xoay 360 độ vô hạn */
+  animation: spin 0.85s linear infinite;
+  display: inline-block;
+}
+
+.spinner-text {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   1. KHỐI HEADER & NAVIGATION (FLEXBOX 1D)
+   ========================================================================== */
+header {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  padding: var(--space-md) var(--space-lg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: var(--space-lg);
+}
+
+nav a {
+  color: var(--text-nav);
+  font-weight: 500;
+  transition: color 0.2s var(--transition-smooth);
+}
+
+nav a:hover {
+  color: var(--secondary);
+}
+
+/* ==========================================================================
+   2. KHỐI CV CONTAINER - BỐ CỤC TỔNG THỂ 2 CỘT (CSS GRID)
+   ========================================================================== */
+.cv-container {
+  max-width: var(--container-max-width);
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-lg);
+  display: grid;
+  grid-template-columns: 320px 1fr; /* Cột sidebar 320px, cột main nhận không gian còn lại */
+  gap: var(--space-xl);             /* Khoảng cách đồng nhất giữa 2 cột */
+  align-items: start;
+}
+
+/* Thẻ bao quanh các khối nội dung */
+.card-box {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   3. CỘT 1: CV-SIDEBAR
+   ========================================================================== */
+.cv-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.profile-card {
+  text-align: center;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  margin: 0 auto var(--space-md);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  display: grid;
+  place-items: center;
+  color: var(--text-white);
+  font-size: 2.5rem;
+  font-weight: 700;
+  border: 4px solid var(--primary-light);
+  box-shadow: var(--shadow-sm);
+  /* HOẠT ĐỘNG 4: Tối ưu hiệu ứng hover cho Avatar bằng transform */
+  transition: transform 0.3s var(--transition-bezier);
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Hỗ trợ hiển thị ảnh đại diện khi tích hợp thẻ <picture> hoặc <img> */
+.avatar img,
+.avatar picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+  display: block;
+}
+
+.profile-name {
+  font-size: 1.4rem;
+  color: var(--text-dark);
+}
+
+.profile-title {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: var(--space-xs);
+}
+
+.profile-bio {
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+/* Tiêu đề chung cho các section */
+.section-title {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+/* Danh sách kỹ năng (Badge List) */
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  list-style: none;
+}
+
+.badge {
+  background-color: var(--primary-light);
+  color: var(--primary-hover);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: default;
+  /* HOẠT ĐỘNG 4: Thay thế dịch chuyển top bằng transform để tối ưu GPU */
+  transition: transform 0.2s var(--transition-smooth), background-color 0.2s var(--transition-smooth);
+}
+
+.badge:hover {
+  /* HOẠT ĐỘNG 4: Dùng transform: translateY(-2px) thay vì position/top */
+  transform: translateY(-2px);
+  background-color: #bae6fd;
+}
+
+/* Danh sách liên hệ - Chống tràn ngang trên màn hình siêu hẹp */
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.contact-list li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.contact-list a {
+  color: var(--primary);
+  word-break: break-all;
+}
+
+/* ==========================================================================
+   4. CỘT 2: CV-MAIN
+   ========================================================================== */
+.cv-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-text p + p {
+  margin-top: var(--space-sm);
+}
+
+/* ==========================================================================
+   KHU VỰC DỊCH VỤ (SERVICES CONTAINER) & LƯỚI DỰ ÁN (PROJECT GRID)
+   ========================================================================== */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Màn hình lớn > 1024px: 4 cột */
+  gap: var(--space-20);                  /* Khoảng cách chuẩn: 20px */
+}
+
+/* HOẠT ĐỘNG 1: Sử dụng minmax(min(100%, 240px), 1fr) để ngăn chặn tràn viền ngang */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--space-lg);
+}
+
+/* ==========================================================================
+   HOẠT ĐỘNG 2: REFACTORING CSS THEO NGUYÊN TẮC DRY (DON'T REPEAT YOURSELF)
+   - Gộp các thuộc tính dùng chung giữa .service-card và .project-card:
+     background, border, bo góc, padding, flex display, transition GPU (Composite).
+   - Tối ưu kích thước file, nâng cao tính mô-đun và khả năng mở rộng.
+   ========================================================================== */
+.service-card,
+.project-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  /* Chuyển động chuẩn mượt mà được tăng tốc phần cứng (GPU) */
+  transition: transform 0.25s var(--transition-smooth),
+              box-shadow 0.25s var(--transition-smooth),
+              border-color 0.25s var(--transition-smooth);
+}
+
+/* Hiệu ứng Hover chung: dịch chuyển translateY và đổ bóng box-shadow */
+.service-card:hover,
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Tùy biến riêng cho .service-card --- */
+.service-card {
+  gap: var(--space-xs);
+}
+
+.service-card:hover {
+  border-color: var(--primary);
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+  transition: transform 0.25s var(--transition-bezier);
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1);
+}
+
+.service-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  overflow-wrap: break-word;
+}
+
+.service-desc {
+  font-size: 0.875rem;
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+/* --- Tùy biến riêng cho .project-card --- */
+.project-card {
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.project-card:hover {
+  border-color: var(--secondary);
+}
+
+.project-card h4 {
+  color: var(--text-dark);
+  font-size: 1.05rem;
+  overflow-wrap: break-word;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  overflow-wrap: break-word;
+}
+
+.project-tech {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ==========================================================================
+   6. KHỐI FOOTER
+   ========================================================================== */
+footer {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  margin-top: var(--space-2xl);
+  font-size: 0.9rem;
+}
+
+.footer-note {
+  margin-top: var(--space-xs);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   HOẠT ĐỘNG 4: TỔNG KẾT TỐI ƯU HIỆU NĂNG (PERFORMANCE REFACTORING SUMMARY)
+   --------------------------------------------------------------------------
+   * Nguyên lý Kỹ thuật:
+     - Các thuộc tính cũ (top, left, bottom, right, margin) kích hoạt 3 giai đoạn:
+       1. Layout (Reflow): Trình duyệt tính toán lại kích thước và tọa độ DOM.
+       2. Paint (Repaint): Vẽ lại các pixel trên màn hình.
+       3. Composite: Ghép các layer lại với nhau.
+       => Khiến CPU quá tải, gây hiện tượng giật lag, tụt khung hình (dưới 60fps).
+     - Thuộc tính mới (transform: translate(), scale(), rotate()):
+       Chỉ kích hoạt giai đoạn Composite. Quá trình này được GPU (Hardware Acceleration)
+       xử lý độc lập trên Render Layer riêng, hoàn toàn không gây Reflow và Repaint.
+       => Đảm bảo hiệu năng ổn định 60 FPS mượt mà trên cả thiết bị di động yếu.
+   ========================================================================== */
+
+/* ==========================================================================
+   MEDIA QUERIES - MÀN HÌNH TỪ 768px ĐẾN 1024px (TABLET)
+   HOẠT ĐỘNG 1: SỬA LỖI CO GẬP CHỮ Ở KHỐI DỊCH VỤ .services-container
+   - Chuyển .cv-container sang bố cục 1 cột để .cv-main nhận toàn bộ bề rộng màn hình.
+   - Thiết lập .services-container hiển thị 2 cột thoáng đãng, cân đối (không bị chèn ép).
+   - Tối ưu padding card để chữ hiển thị đầy đủ, không bị rớt từ cụt ngắt.
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .cv-container {
+    grid-template-columns: 1fr;
+    padding: 0 var(--space-md);
+    margin: var(--space-lg) auto;
+    gap: var(--space-lg);
+  }
+
+  .services-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .service-card,
+  .project-card {
+    padding: var(--space-md);
+  }
+}
+
+/* ==========================================================================
+   MEDIA QUERIES - MÀN HÌNH < 768px (MOBILE)
+   HOẠT ĐỘNG 1: SỬA LỖI DỒN CHỮ Ở THANH NAVIGATION & BỐ CỤC MOBILE
+   - Thiết kế các liên kết điều hướng dạng nút bấm (Pill buttons) với touch target chuẩn.
+   - Ngăn chặn dồn ép chữ, hỗ trợ xuống dòng mềm mại trên thiết bị di động.
+   - Chuyển khối dịch vụ thành 1 cột duy nhất để dễ đọc trên màn hình dọc.
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Tối ưu hóa điều hướng Header cho thiết bị di động */
+  header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  nav {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 10px;
+  }
+
+  nav a {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 0.875rem;
+    border-radius: var(--radius-full);
+    background-color: rgba(255, 255, 255, 0.08);
+    transition: background-color 0.2s var(--transition-smooth),
+                color 0.2s var(--transition-smooth);
+  }
+
+  nav a:hover,
+  nav a:active {
+    background-color: rgba(14, 165, 233, 0.2);
+    color: var(--secondary);
+  }
+
+  /* Màn hình Mobile: Dịch vụ hiển thị 1 cột duy nhất */
+  .services-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tối ưu kích thước padding của các card trên màn hình nhỏ */
+  .card-box {
+    padding: var(--space-md);
+  }
+
+  /* Điều chỉnh kích thước Avatar cho nhỏ gọn, cân đối */
+  .avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2rem;
+  }
+
+  /* Vô hiệu hoá chuyển động hover trên màn hình cảm ứng để tiết kiệm pin & tránh dính hover */
+  @media (hover: none) {
+    .btn:hover,
+    .service-card:hover,
+    .project-card:hover {
+      transform: none;
+    }
+  }
+}
+
+/* ==========================================================================
+   MEDIA QUERIES - MÀN HÌNH NHỎ DƯỚI 375px (SMALL MOBILE - IPHONE SE, GALAXY FOLD)
+   HOẠT ĐỘNG 1: SỬA TRIỆT ĐỂ LỖI TRÀN VIỀN NGANG (HORIZONTAL OVERFLOW)
+   - Thu hẹp padding lề và padding thẻ để tối ưu diện tích nội dung hữu dụng.
+   - Đảm bảo lưới dự án co về 1 cột đầy đủ.
+   - Tối ưu kích thước nút bấm và thanh menu cho màn hình siêu hẹp.
+   ========================================================================== */
+@media (max-width: 375px) {
+  .cv-container {
+    padding: 0 var(--space-xs);
+    gap: var(--space-md);
+  }
+
+  .card-box {
+    padding: var(--space-md) var(--space-xs);
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .logo {
+    font-size: 1.15rem;
+  }
+
+  nav ul {
+    gap: 6px;
+  }
+
+  nav a {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .profile-name {
+    font-size: 1.25rem;
+  }
+
+  .profile-bio {
+    font-size: 0.825rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
+  }
+}
