@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Cá Nhân - Nguyễn Văn An | Web Developer</title>
+    <!-- Liên kết tới file CSS chuẩn hóa Design System & Responsive -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. KHỐI HEADER: Thanh điều hướng (Flexbox 1D dàn đều) -->
+    <header>
+        <nav aria-label="Điều hướng chính">
+            <a href="#" class="logo">NguyenVanAn.dev</a>
+            <ul>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#services">Dịch vụ</a></li>
+                <li><a href="#skills">Kỹ năng</a></li>
+                <li><a href="#projects">Dự án</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 2. KHỐI MAIN: Bố cục CV CSS Grid (cv-sidebar & cv-main) -->
+    <main class="cv-container">
+
+        <!-- CỘT 1: SIDEBAR (cv-sidebar) -->
+        <aside class="cv-sidebar">
+            
+            <!-- Thông tin cá nhân & Avatar -->
+            <div class="card-box profile-card">
+                <div class="avatar" aria-hidden="true">VA</div>
+                <h1 class="profile-name">Nguyễn Văn An</h1>
+                <p class="profile-title">Frontend / Web Developer</p>
+                <p class="profile-bio">
+                    Sinh viên năm 3 CNTT đam mê xây dựng giao diện web hiện đại & trải nghiệm người dùng tối ưu.
+                </p>
+            </div>
+
+            <!-- Kỹ năng chuyên môn (Flexbox + flex-wrap) -->
+            <section id="skills" class="card-box" aria-labelledby="skills-title">
+                <h3 id="skills-title" class="section-title">Kỹ Năng</h3>
+                <ul class="badge-list">
+                    <li class="badge">HTML5</li>
+                    <li class="badge">CSS3 / Flexbox</li>
+                    <li class="badge">CSS Grid</li>
+                    <li class="badge">JavaScript (ES6+)</li>
+                    <li class="badge">Responsive Design</li>
+                    <li class="badge">Git / GitHub</li>
+                    <li class="badge">Figma to HTML</li>
+                </ul>
+            </section>
+
+            <!-- Thông tin liên hệ -->
+            <section id="contact" class="card-box" aria-labelledby="contact-title">
+                <h3 id="contact-title" class="section-title">Thông Tin Liên Hệ</h3>
+                <ul class="contact-list">
+                    <li><strong>Email:</strong> <a href="mailto:an.nguyen@example.com">an.nguyen@example.com</a></li>
+                    <li><strong>Điện thoại:</strong> 0987 654 321</li>
+                    <li><strong>Địa chỉ:</strong> TP. Hồ Chí Minh</li>
+                    <li><strong>GitHub:</strong> <a href="https://github.com" target="_blank" rel="noopener noreferrer">github.com/nguyenvanan</a></li>
+                </ul>
+            </section>
+
+        </aside>
+
+        <!-- CỘT 2: NỘI DUNG CHÍNH (cv-main) -->
+        <div class="cv-main">
+
+            <!-- Giới thiệu bản thân -->
+            <section id="about" class="card-box" aria-labelledby="about-title">
+                <h2 id="about-title" class="section-title">Giới Thiệu Bản Thân</h2>
+                <div class="about-text">
+                    <p>
+                        Xin chào! Tôi là <strong>Nguyễn Văn An</strong>, định hướng phát triển chuyên sâu theo con đường
+                        <em>Frontend Developer</em>. Tôi có niềm đam mê xây dựng các giao diện web trực quan, chuẩn Semantic HTML,
+                        tối ưu trải nghiệm người dùng (UX) và thích ứng hoàn hảo trên mọi thiết bị.
+                    </p>
+                    <p>
+                        Với nền tảng vững chắc về hệ thống bố cục CSS hiện đại (Flexbox & CSS Grid), tôi luôn hướng tới việc viết
+                        mã nguồn sạch, có tổ chức, dễ bảo trì và tuân thủ các tiêu chuẩn thiết kế web quốc tế.
+                    </p>
+                </div>
+            </section>
+
+            <!-- HOẠT ĐỘNG 3: KHU VỰC DỊCH VỤ (SERVICES CONTAINER) -->
+            <section id="services" class="card-box" aria-labelledby="services-title">
+                <h2 id="services-title" class="section-title">Dịch Vụ Cung Cấp</h2>
+                <div class="services-container">
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">🎨</div>
+                        <h3 class="service-title">Thiết Kế UI/UX</h3>
+                        <p class="service-desc">Xây dựng giao diện web trực quan, thân thiện người dùng và chuyển đổi Figma sang HTML/CSS chuẩn pixel.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">💻</div>
+                        <h3 class="service-title">Phát Triển Frontend</h3>
+                        <p class="service-desc">Lập trình giao diện với HTML5, CSS3 hiện đại, JavaScript ES6+, tối ưu hiệu năng và khả năng truy cập.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">📱</div>
+                        <h3 class="service-title">Responsive Design</h3>
+                        <p class="service-desc">Tối ưu hóa hiển thị mượt mà trên mọi kích thước màn hình từ Desktop, Tablet cho đến điện thoại di động.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">⚡</div>
+                        <h3 class="service-title">Tối Ưu & Refactoring</h3>
+                        <p class="service-desc">Tái cấu trúc mã nguồn theo chuẩn Design System (CSS Variables), cải thiện tốc độ tải và khả năng mở rộng.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Dự án tiêu biểu (Lưới CSS Grid co giãn Responsive) -->
+            <section id="projects" class="card-box" aria-labelledby="projects-title">
+                <h2 id="projects-title" class="section-title">Dự Án Nổi Bật</h2>
+                <div class="project-grid">
+                    
+                    <article class="project-card">
+                        <div>
+                            <h4>1. Website Thương Mại Mini</h4>
+                            <p>Giao diện bán phụ kiện công nghệ chuẩn responsive, có giỏ hàng tương tác.</p>
+                        </div>
+                        <span class="project-tech">HTML5 • CSS Grid • JavaScript</span>
+                    </article>
+
+                    <article class="project-card">
+                        <div>
+                            <h4>2. Blog Công Nghệ Cá Nhân</h4>
+                            <p>Trang chia sẻ kinh nghiệm lập trình web, cấu trúc chuẩn SEO, hỗ trợ Dark Mode.</p>
+                        </div>
+                        <span class="project-tech">Semantic HTML • Modern CSS</span>
+                    </article>
+
+                    <article class="project-card">
+                        <div>
+                            <h4>3. Ứng Dụng To-Do List</h4>
+                            <p>Quản lý công việc hàng ngày, hỗ trợ thêm/xóa/đánh dấu hoàn thành trên LocalStorage.</p>
+                        </div>
+                        <span class="project-tech">JavaScript ES6 • DOM API</span>
+                    </article>
+
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- 3. KHỐI FOOTER -->
+    <footer>
+        <p>&copy; 2026 Nguyễn Văn An. Tất cả các quyền được bảo lưu.</p>
+        <p class="footer-note">
+            Được xây dựng với CSS Grid, Flexbox & Hệ thống Design System chuẩn hóa.
+        </p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+/* ==========================================================================
+   PORTFOLIO CV - DESIGN SYSTEM & RESPONSIVE LAYOUT
+   Môn học: Thiết kế Web - Bài tập Thực hành Tuần 4
+   ========================================================================== */
+
+/* ==========================================================================
+   HOẠT ĐỘNG 1: BẢNG MÃ MÀU THÔNG MINH (CSS VARIABLES)
+   & HOẠT ĐỘNG 4: DESIGN SYSTEM REFACTORING (TRÍCH XUẤT BIẾN TOÀN CỤC)
+   ========================================================================== */
+:root {
+  /* --- HOẠT ĐỘNG 1: BỘ BIẾN MÀU CỐT LÕI --- */
+  /* 2 màu chủ đạo (Primary & Secondary) */
+  --primary: #0284c7;             /* Màu chủ đạo 1: Xanh dương hiện đại, chuyên nghiệp */
+  --secondary: #0ea5e9;           /* Màu chủ đạo 2: Xanh cyan tươi sáng, tạo điểm nhấn */
+
+  /* 3 mức màu xám cho văn bản (Typography Grayscale) */
+  --text-dark: #0f172a;           /* Mức 1 (Đậm nhất): Tiêu đề, đề mục, chữ có độ tương phản cao */
+  --text-main: #334155;           /* Mức 2 (Chuẩn): Nội dung đọc chính (body text) */
+  --text-light: #64748b;          /* Mức 3 (Nhạt): Chú thích phụ, ngày tháng, thông tin muted */
+
+  /* 1 màu nền tổng thể */
+  --bg-color: #f8fafc;            /* Màu nền chính cho toàn trang web (Body background) */
+
+  /* --- HOẠT ĐỘNG 4: DESIGN SYSTEM REFACTORING (MÀU SẮC GIAO DIỆN BỔ TRỢ) --- */
+  --primary-hover: #0369a1;       /* Màu hover cho liên kết và button */
+  --primary-light: #e0f2fe;       /* Nền nhạt cho badge kĩ năng, viền avatar */
+  --bg-surface: #ffffff;          /* Nền thẻ card, panel trắng */
+  --bg-card: #f1f5f9;             /* Nền các thẻ con bên trong card */
+  --bg-dark: #0f172a;             /* Nền tối cho Header và Footer */
+  --text-white: #ffffff;          /* Chữ màu trắng trên nền tối */
+  --text-nav: #cbd5e1;            /* Màu chữ link thanh điều hướng */
+  --border-color: #e2e8f0;        /* Màu đường viền chuẩn */
+
+  /* --- HOẠT ĐỘNG 4: HỆ THỐNG KHOẢNG CÁCH CHUẨN HÓA (SPACING TOKENS) --- */
+  --space-xs: 0.5rem;             /* 8px */
+  --space-sm: 0.75rem;            /* 12px */
+  --space-md: 1rem;               /* 16px */
+  --space-20: 20px;               /* 20px - Khoảng cách gap theo yêu cầu Hoạt động 3 */
+  --space-lg: 1.5rem;             /* 24px */
+  --space-xl: 2rem;               /* 32px */
+  --space-2xl: 3rem;              /* 48px */
+
+  /* Bo góc (Border Radius) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-full: 9999px;
+
+  /* Hiệu ứng đổ bóng (Box Shadow) */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+
+  /* Kích thước chiều rộng tối đa */
+  --container-max-width: 1100px;
+}
+
+/* ==========================================================================
+   CSS RESET & CẤU HÌNH NỀN TẢNG
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   1. KHỐI HEADER & NAVIGATION (FLEXBOX 1D)
+   ========================================================================== */
+header {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  padding: var(--space-md) var(--space-lg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: var(--space-lg);
+}
+
+nav a {
+  color: var(--text-nav);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--secondary);
+}
+
+/* ==========================================================================
+   2. KHỐI CV CONTAINER - BỐ CỤC TỔNG THỂ 2 CỘT (CSS GRID)
+   ========================================================================== */
+.cv-container {
+  max-width: var(--container-max-width);
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-lg);
+  display: grid;
+  grid-template-columns: 320px 1fr; /* Cột sidebar 320px, cột main nhận không gian còn lại */
+  gap: var(--space-xl);             /* Khoảng cách đồng nhất giữa 2 cột */
+  align-items: start;
+}
+
+/* Thẻ bao quanh các khối nội dung */
+.card-box {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   3. CỘT 1: CV-SIDEBAR
+   ========================================================================== */
+.cv-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.profile-card {
+  text-align: center;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  margin: 0 auto var(--space-md);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  display: grid;
+  place-items: center;
+  color: var(--text-white);
+  font-size: 2.5rem;
+  font-weight: 700;
+  border: 4px solid var(--primary-light);
+}
+
+.profile-name {
+  font-size: 1.4rem;
+  color: var(--text-dark);
+}
+
+.profile-title {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: var(--space-xs);
+}
+
+.profile-bio {
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+/* Tiêu đề chung cho các section */
+.section-title {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+/* Danh sách kỹ năng (Badge List) */
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  list-style: none;
+}
+
+.badge {
+  background-color: var(--primary-light);
+  color: var(--primary-hover);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Danh sách liên hệ */
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.contact-list a {
+  color: var(--primary);
+}
+
+/* ==========================================================================
+   4. CỘT 2: CV-MAIN
+   ========================================================================== */
+.cv-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-text p + p {
+  margin-top: var(--space-sm);
+}
+
+/* ==========================================================================
+   HOẠT ĐỘNG 3: RESPONSIVE BREAKPOINT CHALLENGE (PHẦN SERVICES)
+   - Bố cục mặc định cho màn hình lớn (> 1024px): 4 cột
+   - Khoảng cách giữa các ô: gap: 20px (--space-20)
+   ========================================================================== */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Màn hình > 1024px: Hiển thị 4 cột */
+  gap: var(--space-20);                  /* Khoảng cách giữa các ô: gap: 20px */
+}
+
+.service-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+}
+
+.service-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.service-desc {
+  font-size: 0.875rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   5. LƯỚI DỰ ÁN TIÊU BIỂU (PROJECT GRID)
+   ========================================================================== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.project-card h4 {
+  color: var(--text-dark);
+  font-size: 1.05rem;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.project-tech {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ==========================================================================
+   6. KHỐI FOOTER
+   ========================================================================== */
+footer {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  margin-top: var(--space-2xl);
+  font-size: 0.9rem;
+}
+
+.footer-note {
+  margin-top: var(--space-xs);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   HOẠT ĐỘNG 3: MEDIA QUERIES - MÀN HÌNH TỪ 768px ĐẾN 1024px (TABLET)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* Màn hình từ 768px đến 1024px: Hiển thị 2 cột */
+  .services-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
+   HOẠT ĐỘNG 2 & HOẠT ĐỘNG 3: MEDIA QUERIES - MÀN HÌNH < 768px (MOBILE)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* HOẠT ĐỘNG 2: Chuyển đổi bố cục tổng thể từ CSS Grid 2 cột thành 1 cột duy nhất */
+  .cv-container {
+    grid-template-columns: 1fr;         /* 1 cột duy nhất trên thiết bị di động */
+    padding: 0 var(--space-md);         /* Tối ưu lề viền màn hình điện thoại */
+    margin: var(--space-md) auto;
+    gap: var(--space-lg);
+  }
+
+  /* Tối ưu hóa điều hướng Header cho thiết bị di động */
+  header {
+    padding: var(--space-md);
+  }
+
+  nav {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs) var(--space-md);
+  }
+
+  /* HOẠT ĐỘNG 3: Màn hình < 768px: Hiển thị 1 cột duy nhất */
+  .services-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tối ưu kích thước padding của các card trên màn hình nhỏ */
+  .card-box {
+    padding: var(--space-md);
+  }
+
+  /* Điều chỉnh kích thước Avatar cho nhỏ gọn, cân đối */
+  .avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2rem;
+  }
+}
