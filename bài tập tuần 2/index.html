@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Cá Nhân - Nguyễn Văn An | Web Developer</title>
+    <!-- Một chút CSS cơ bản giúp trang hiển thị đẹp mắt và dễ quan sát cấu trúc semantic -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #1e293b;
+            color: #fff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        nav a {
+            color: #f1f5f9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #38bdf8;
+        }
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        h2 {
+            color: #0f172a;
+            border-bottom: 3px solid #38bdf8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            list-style: none;
+            margin-top: 1rem;
+        }
+        .badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        article.project-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 1.5rem;
+            background-color: #f8fafc;
+        }
+        article.project-card h3 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        footer a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+      ==========================================================================
+      1. KHỐI HEADER (<header>):
+      - Vai trò: Đại diện cho phần mở đầu / đầu trang (banner, tiêu đề, menu điều hướng).
+      - Chứa: Logo/tên thương hiệu cá nhân và khối điều hướng chính (<nav>).
+      ========================================================================== 
+    -->
+    <header>
+        <!-- 
+          Thẻ <nav>: 
+          - Vai trò: Chứa tập hợp các liên kết điều hướng (navigation links) của website.
+          - Giúp người dùng và công cụ tìm kiếm dễ dàng chuyển đổi qua lại giữa các mục chính.
+        -->
+        <nav aria-label="Điều hướng chính">
+            <a href="#" class="logo">NguyenVanAn.dev</a>
+            <ul>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#skills">Kỹ năng</a></li>
+                <li><a href="#projects">Dự án</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 
+      ==========================================================================
+      2. KHỐI MAIN (<main>):
+      - Vai trò: Chứa nội dung chính, quan trọng và độc nhất của trang web.
+      - Quy tắc: Mỗi trang web chỉ nên có duy nhất một thẻ <main> hiển thị.
+      - Không chứa các phần lặp lại trên nhiều trang như header, footer hay sidebar chung.
+      ========================================================================== 
+    -->
+    <main>
+
+        <!-- 
+          SECTION 1: Giới thiệu bản thân (<section id="about">)
+          - Vai trò thẻ <section>: Đại diện cho một phân đoạn nội dung độc lập theo chủ đề.
+          - Nội dung mục này: Tóm tắt lý lịch, đam mê công nghệ và định hướng phát triển.
+        -->
+        <section id="about" aria-labelledby="about-title">
+            <h2 id="about-title">Giới Thiệu Bản Thân</h2>
+            <p>
+                Xin chào! Tôi là <strong>Nguyễn Văn An</strong>, hiện là sinh viên năm 3 chuyên ngành Công nghệ Thông tin,
+                định hướng phát triển theo con đường <em>Frontend / Web Developer</em>.
+            </p>
+            <p style="margin-top: 0.8rem;">
+                Tôi có niềm đam mê mãnh liệt với việc xây dựng các giao diện web trực quan, chuẩn Semantic HTML,
+                tối ưu trải nghiệm người dùng (UX) và khả năng tương thích cao trên mọi thiết bị. Mục tiêu của tôi
+                là không ngừng học hỏi các công nghệ hiện đại và tạo ra những sản phẩm web mang lại giá trị thực tiễn.
+            </p>
+        </section>
+
+        <!-- 
+          SECTION 2: Kỹ năng chuyên môn (<section id="skills">)
+          - Vai trò: Trình bày năng lực công nghệ, công cụ lập trình và các kỹ năng cốt lõi.
+        -->
+        <section id="skills" aria-labelledby="skills-title">
+            <h2 id="skills-title">Kỹ Năng Chuyên Môn</h2>
+            <p>Dưới đây là các công nghệ và công cụ tôi sử dụng thường xuyên trong các bài tập và dự án thực tế:</p>
+            
+            <ul class="badge-list">
+                <li class="badge">HTML5 / Semantic HTML</li>
+                <li class="badge">CSS3 / Flexbox / Grid</li>
+                <li class="badge">JavaScript (ES6+)</li>
+                <li class="badge">Responsive Web Design</li>
+                <li class="badge">Git & GitHub</li>
+                <li class="badge">VS Code & DevTools</li>
+                <li class="badge">Figma to HTML</li>
+            </ul>
+        </section>
+
+        <!-- 
+          SECTION 3: Dự án tiêu biểu (<section id="projects">)
+          - Vai trò: Giới thiệu các sản phẩm/bài tập lớn đã thực hiện.
+          - Sử dụng thẻ con <article>: Biểu thị từng sản phẩm độc lập, có thể tái sử dụng.
+        -->
+        <section id="projects" aria-labelledby="projects-title">
+            <h2 id="projects-title">Dự Án Nổi Bật</h2>
+            <div class="project-grid">
+                
+                <!-- 
+                  Thẻ <article>: 
+                  - Vai trò: Chứa một khối nội dung độc lập, tự thân hoàn chỉnh (bài viết, sản phẩm, dự án).
+                -->
+                <article class="project-card">
+                    <h3>1. Website Thương Mại Mini</h3>
+                    <p>
+                        Trang web bán phụ kiện công nghệ đơn giản với giao diện chuẩn responsive,
+                        tích hợp giỏ hàng và lọc sản phẩm theo danh mục.
+                    </p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #64748b;">
+                        <strong>Công nghệ:</strong> HTML5, CSS3, JavaScript LocalStorage
+                    </p>
+                </article>
+
+                <article class="project-card">
+                    <h3>2. Trang Blog Công Nghệ Cá Nhân</h3>
+                    <p>
+                        Giao diện blog chia sẻ kinh nghiệm học lập trình web, cấu trúc ngữ nghĩa
+                        chuẩn SEO và hỗ trợ chế độ Dark Mode.
+                    </p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #64748b;">
+                        <strong>Công nghệ:</strong> Semantic HTML, Modern CSS Grid
+                    </p>
+                </article>
+
+                <article class="project-card">
+                    <h3>3. Ứng Dụng To-Do List</h3>
+                    <p>
+                        Ứng dụng quản lý công việc hàng ngày, hỗ trợ thêm/xóa/đánh dấu hoàn thành
+                        và lưu trạng thái công việc trên trình duyệt.
+                    </p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #64748b;">
+                        <strong>Công nghệ:</strong> HTML, CSS, JavaScript DOM Manipulation
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 
+          SECTION 4: Thông tin liên hệ (<section id="contact">)
+          - Vai trò: Cung cấp phương thức liên hệ và biểu mẫu gửi tin nhắn.
+        -->
+        <section id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title">Thông Tin Liên Hệ</h2>
+            <p>Nếu bạn muốn trao đổi công việc hoặc hợp tác trong các dự án web, hãy kết nối với tôi qua:</p>
+            <ul style="margin-top: 0.8rem; list-style-position: inside;">
+                <li><strong>Email:</strong> <a href="mailto:nguyenvanan.dev@example.com" style="color: #0284c7;">nguyenvanan.dev@example.com</a></li>
+                <li><strong>Điện thoại:</strong> 0987 654 321</li>
+                <li><strong>Địa chỉ:</strong> TP. Hồ Chí Minh, Việt Nam</li>
+                <li><strong>GitHub:</strong> <a href="https://github.com" target="_blank" rel="noopener noreferrer" style="color: #0284c7;">github.com/nguyenvanan</a></li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- 
+      ==========================================================================
+      3. KHỐI FOOTER (<footer>):
+      - Vai trò: Chứa thông tin cuối trang (chân trang).
+      - Thường bao gồm: Bản quyền (copyright), thông tin tác giả, điều khoản và liên kết nhanh.
+      ========================================================================== 
+    -->
+    <footer>
+        <p>&copy; 2026 Nguyễn Văn An. Tất cả các quyền được bảo lưu.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            Trang web được thiết kế bằng Semantic HTML5 chuẩn W3C cho Bài thực hành số 1.
+        </p>
+    </footer>
+
+</body>
+</html>
